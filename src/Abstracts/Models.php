@@ -157,6 +157,10 @@ abstract class Models
         }
         return false;
     }
+    public function getDirty()
+    {
+        return $this->_dirty;
+    }
 
 
     /**
