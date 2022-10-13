@@ -174,7 +174,7 @@ abstract class Models
     public function setDirty($key = '')
     {
         if (empty($key)) {
-            foreach (array_keys($this->fieldsMap) as $f => $fieldKey) {
+            foreach ($this->fieldsMap as $f => $fieldKey) {
                 $this->setDirty($f);
             }
         } else {
