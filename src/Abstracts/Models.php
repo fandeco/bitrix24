@@ -299,7 +299,7 @@ abstract class Models
                         default:
                             break;
                     }
-                    $array[$key] = $val;
+                    $array[$original_key] = $val;
                 }
             }
         }

@@ -18,30 +18,21 @@ class GetObjectTest extends TestCase
     {
         $id = 21240;
 
-        /* @var Get $Object */
-        $Object = Model::get('Lead', $id);
-
-        $Object->set('WEB', 'fandeco.ru');
-
-        $Object->save();
-
-
-        echo '<pre>';
-        print_r($Object->toArray());
-        die;
-
-
         self::assertEquals($Object->get('id'), $id);
     }
 
     public function testGetContact()
     {
-        $id = 21075;
+        $id = 21256;
         /* @var Get $Object */
         $Object = Model::get('Lead', $id);
 
+        $Object->set('VISITOR_NUMBER', 222222);
+        $Object->save();
+
+
         echo '<pre>';
-        print_r($Object->contact());
+        print_r($Object->toArray());
         die;
 
         self::assertEquals($Object->get('id'), $id);

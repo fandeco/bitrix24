@@ -60,6 +60,8 @@ class Model
             $Method->addParam('filter', $criteria);
         }
 
+        $Method->addParam('select', ['*', 'UF_*']);
+
         $Bot = new Bot('API');
         $Client = $Bot->method($Method);
 

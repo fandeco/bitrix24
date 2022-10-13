@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "tests": "phpunit --bootstrap bootstrap.php",
-    "up:release": "gh release create \"v1.0.3\" --generate-notes"
+    "up:release": "gh release create \"v1.0.4\" --generate-notes"
   },
   "keywords": [
     "client"
