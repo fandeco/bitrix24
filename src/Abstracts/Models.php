@@ -353,13 +353,18 @@ abstract class Models
         }
 
         $Method->addParam('fields', $array);
+
+
         if ($this->isNew() || $this->isNotice()) {
             $Method->addParam('params', [
                 'REGISTER_SONET_EVENT' => 'Y' // уведомить о лиде
             ]);
-        } else {
+        }
+
+        if ($this->isNew()) {
             $Method->addParam('id', $this->id());
         }
+
 
 
         $Bot = new Bot(getenv('BITRIX_BOT_DEFAULT'));
