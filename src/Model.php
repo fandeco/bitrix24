@@ -101,10 +101,6 @@ class Model
             ])
             ->addParam('select', $select);
 
-        echo '<pre>';
-        print_r($select);
-        die;
-
         if ($select) {
             $Method->addParam('select', $select);
         }
