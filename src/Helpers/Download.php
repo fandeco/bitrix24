@@ -8,7 +8,7 @@
  * Time: 11:51
  */
 
-namespace App\Helpers;
+namespace Bitrix24\Helpers;
 
 use Exception;
 use GuzzleHttp\Client;
