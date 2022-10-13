@@ -5,6 +5,7 @@
 ### Для mac
 
 Утилита
+
 ```bash
 brew install gh
 ```
@@ -31,11 +32,11 @@ tests = Tests\
   "repositories": [
     {
       "type": "vcs",
-      "url": "https://github.com/webnitros/app"
+      "url": "https://github.com/webnitros/bitrix24"
     }
   ],
   "require": {
-    "webnitros/app": "^1.0.0"
+    "webnitros/bitrix24": "^1.0.0"
   }
 }
 ```
@@ -44,57 +45,11 @@ tests = Tests\
 
 Переменные для env задаются в файле phpunit.xml
 
+# Быстрый старт
 
-```js
-Array
-(
-    [TITLE] => Из чата 79345555061
-    [NAME] => Мария Кияшко
-    [SECOND_NAME] => 
-    [LAST_NAME] => 
-    [STATUS_ID] => NEW
-    [OPENED] => Y
-    [ASSIGNED_BY_ID] => 12822
-    [TYPE] => chat
-    [REGISTER_SONET_EVENT] => Y
-    [ADDRESS_CITY] => 
-    [UTM_TERM] => 
-    [ADDRESS_REGION] => 
-    [ADDRESS_COUNTRY] => 
-    [UF_CRM_1665568341670] => fandeco
-    [UF_CRM_1662118608905] => 0
-    [UF_CRM_1663927628378] => Fandeco.ru
-    [UF_CRM_1663927675305] => 
-    [SOURCE_ID] => 4
-    [WEB] => Array
-        (
-            [0] => Array
-                (
-                    [VALUE] => https://fandeco.ru/
-                    [VALUE_TYPE] => WORK
-                )
+Модели работают аналогично объектам из базы данных с той разнице что выполнение запросов проиходит через REST
 
-        )
-
-    [PHONE] => Array
-        (
-            [0] => Array
-                (
-                    [VALUE] => 79345555061
-                    [VALUE_TYPE] => WORK
-                )
-
-        )
-
-    [EMAIL] => Array
-        (
-            [0] => Array
-                (
-                    [VALUE] => 
-                    [VALUE_TYPE] => WORK
-                )
-
-        )
-
-)
+```php
+$Object = \Bitrix24\Model::get('Lead', 21225)
+$Object->get('NAME') // Имя пользователя
 ```
