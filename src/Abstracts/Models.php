@@ -76,19 +76,6 @@ abstract class Models
                 $this->fieldsMap[$field] = 'string';
             }
         }
-
-    }
-
-    /**
-     * @var array
-     */
-    protected $data;
-
-    public function fromArrayFirst(array $array)
-    {
-        $this->fromArray($array);
-        $this->old_data = $this->data;
-        return $this;
     }
 
     public function fromArray(array $array, $saveOld = false)
@@ -167,6 +154,15 @@ abstract class Models
     public function setDirty($key = '')
     {
         $this->_dirty[$key] = $key;
+    }
+
+
+    /**
+     * @return array
+     */
+    public function getDirtys()
+    {
+        return $this->_dirty;
     }
 
 
