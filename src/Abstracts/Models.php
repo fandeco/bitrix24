@@ -361,10 +361,9 @@ abstract class Models
             ]);
         }
 
-        if ($this->isNew()) {
+        if (!$this->isNew()) {
             $Method->addParam('id', $this->id());
         }
-
 
 
         $Bot = new Bot(getenv('BITRIX_BOT_DEFAULT'));
