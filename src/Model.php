@@ -83,7 +83,7 @@ class Model
      * @return Models\Crm\Lead\Get|null
      * @throws \Exception
      */
-    public static function getList($className, array $filter, $orderBy = 'ID', $orderDir = 'DESC', $select = ['*', 'UF_*'])
+    public static function getList($className, array $filter, $orderBy = 'ID', $orderDir = 'DESC', $select = ['*', 'UF_*', 'PHONE', 'EMAIL', 'WEB'])
     {
         if (!$class = (new Model)->getClass($className)) {
             return null;
@@ -101,10 +101,9 @@ class Model
             ])
             ->addParam('select', $select);
 
-        $Method->addParam('filter', $filter)
-            ->addParam('order', [
-                $orderBy => $orderDir
-            ]);
+        echo '<pre>';
+        print_r($select);
+        die;
 
         if ($select) {
             $Method->addParam('select', $select);
