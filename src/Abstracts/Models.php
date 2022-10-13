@@ -139,9 +139,14 @@ abstract class Models
         return $this;
     }
 
+    protected $_dirty = [];
+
     public function isDirty($field)
     {
         if (!$this->isNew()) {
+            if (array_key_exists($field, $this->_dirty)) {
+                return true;
+            }
             if ($this->old_data && array_key_exists($field, $this->old_data)) {
                 if ($this->old_data[$field] == $this->data[$field]) {
                     return false;
@@ -150,6 +155,20 @@ abstract class Models
         }
         return true;
     }
+
+
+    /**
+     * Add the field to a collection of field keys that have been modified.
+     *
+     * This function also clears any validation flag associated with the field.
+     *
+     * @param string $key The key of the field to set dirty.
+     */
+    public function setDirty($key = '')
+    {
+        $this->_dirty[$key] = $key;
+    }
+
 
     public function toArrayOriginal()
     {
@@ -318,7 +337,7 @@ abstract class Models
         $Client = $Bot->method($Method);
         $response = $Client->send();
 
-
+        $this->_dirty = [];
         if (!empty($response['result'])) {
             if ($this->_new) {
                 $this->set('id', $response['result']);
