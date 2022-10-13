@@ -114,4 +114,23 @@ class Get extends Models implements IModels
         }
         return $msgs;
     }
+
+
+    public function contact()
+    {
+        $id = $this->get('CONTACT_ID');
+        if (!empty($id)) {
+            return Model::get('Contact', $id);
+        }
+        return null;
+    }
+
+    public function company()
+    {
+        $id = $this->get('COMPANY_ID');
+        if (!empty($id)) {
+            return Model::get('Company', $id);
+        }
+        return null;
+    }
 }

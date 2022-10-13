@@ -23,7 +23,11 @@ class Model
     {
         $this->classes = [
             'Lead' => \Bitrix24\Method\Crm\Lead\Get::class,
-            'User' => \Bitrix24\Method\User\Get::class
+            'User' => \Bitrix24\Method\User\Get::class,
+            'Contact' => \Bitrix24\Method\Crm\Contact\Get::class,
+            'Company' => \Bitrix24\Method\Crm\Company\Get::class,
+            'TimelineComment' => \Bitrix24\Method\Crm\Timeline\Comment\Get::class,
+            'TimelineBindings' => \Bitrix24\Method\Crm\Timeline\Bindings\Get::class,
         ];
     }
 
@@ -77,7 +81,7 @@ class Model
      * @return Models\Crm\Lead\Get|null
      * @throws \Exception
      */
-    public static function getList($className, array $filter, $orderBy = 'ID', $orderDir = 'DESC', array $select = ['*', 'UF_*'])
+    public static function getList($className, array $filter, $orderBy = 'ID', $orderDir = 'DESC', $select = ['*', 'UF_*'])
     {
         if (!$class = (new Model)->getClass($className)) {
             return null;
@@ -94,6 +98,16 @@ class Model
                 $orderBy => $orderDir
             ])
             ->addParam('select', $select);
+
+        $Method->addParam('filter', $filter)
+            ->addParam('order', [
+                $orderBy => $orderDir
+            ]);
+
+        if ($select) {
+            $Method->addParam('select', $select);
+        }
+
 
         $Bot = new Bot(getenv('BITRIX_BOT_DEFAULT'));
         $Client = $Bot->method($Method);
