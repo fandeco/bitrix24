@@ -52,6 +52,8 @@ class Model
 
         if (is_int($criteria)) {
             $Method->addParam('id', $criteria);
+        } else {
+            $Method->addParam('filter', $criteria);
         }
 
         $Bot = new Bot('API');
