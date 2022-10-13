@@ -47,6 +47,13 @@ tests = Tests\
 
 # Быстрый старт
 
+```js
+BITRIX_URL = ''
+BITRIX_BOT_DEFAULT = 'API'
+BITRIX_REST_API = ''
+BITRIX_BOTS = 'NAME BOT:API KEY'
+```
+
 Модели работают аналогично объектам из базы данных с той разнице что выполнение запросов проиходит через REST
 
 ```php
