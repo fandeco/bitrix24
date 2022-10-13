@@ -10,9 +10,7 @@ namespace Bitrix24\Models\Crm\Lead;
 
 
 use Bitrix24\Abstracts\Models;
-use Bitrix24\Interfaces\IMethod;
 use Bitrix24\Interfaces\IModels;
-use Bitrix24\Method\User\Search;
 use Bitrix24\Model;
 
 /**
@@ -23,9 +21,7 @@ use Bitrix24\Model;
  * @property string $LAST_NAME
  * @property string $SECOND_NAME
  * @property array $WEB
- * @property boolean $HAS_PHONE
  * @property array $PHONE
- * @property boolean $HAS_EMAIL
  * @property array $EMAIL
  * @property string $ADDRESS
  * @property string $ADDRESS_2
@@ -78,7 +74,7 @@ class Get extends Models implements IModels
         $this->setAlias('VISITOR_NUMBER', 'UF_CRM_1665550327787');
         $this->setAlias('PAGE_URL', 'UF_CRM_1663927628378');
         $this->setAlias('PAGE_TITLE', 'UF_CRM_1663927675305');
-        $this->setAlias('SOURCE_1C', 'UF_CRM_1665568341670');
+        $this->setAlias('SOURCE_ID', 'UF_CRM_1665568341670');
         parent::__construct();
     }
 
