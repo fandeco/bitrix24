@@ -27,13 +27,10 @@ abstract class Models
     protected array $aliases = [];
     protected array $aliasesArray = [];
     protected array $defaultFields = [];
-    /**
-     * @var array
-     */
-    private $original;
 
-    public function __construct()
+    public function __construct($data = [])
     {
+
         $aliases = $this->aliases();
         foreach ($aliases as $alias => $key) {
             $this->defaultFields[$alias] = null;
@@ -65,6 +62,8 @@ abstract class Models
                     default:
                         break;
                 }
+
+
                 $this->data[$field] = $value;
                 $this->fieldsMap[$field] = $type;
             }
@@ -76,22 +75,27 @@ abstract class Models
                 $this->fieldsMap[$field] = 'string';
             }
         }
+
+
+        if (!empty($data)) {
+            foreach ($data as $key => $value) {
+                $data = $this->_format($key, $value);
+                $this->data[$data['key']] = $data['value'];
+            }
+        }
     }
 
-    public function fromArray(array $array, $saveOld = false)
+    public function fromArray(array $array)
     {
         $this->original = $array;
         foreach ($array as $key => $item) {
-            $this->set($key, $item, $saveOld);
+            $this->set($key, $item);
         }
         return $this;
     }
 
-    protected $old_data = null;
-
-    public function set(string $key, $value, $saveOld = false)
+    protected function _format(string $key, $value)
     {
-
         $key = mb_strtoupper($key);
         $original_key = $this->getAlias($key, true);
         if (array_key_exists($original_key, $this->fieldsMap)) {
@@ -122,7 +126,25 @@ abstract class Models
                     break;
             }
         }
-        $this->data[$original_key] = $value;
+        return [
+            'key' => $original_key,
+            'value' => $value,
+        ];
+    }
+
+    public function set(string $key, $value)
+    {
+        $oldValue = null;
+        if (array_key_exists($key, $this->data)) {
+            $oldValue = $this->data[$key];
+        }
+        $data = $this->_format($key, $value);
+        $v = $data['value'];
+        $key = $data['key'];
+        $this->data[$key] = $v;
+        if ($oldValue !== $v) {
+            $this->setDirty($key);
+        }
         return $this;
     }
 
@@ -130,17 +152,10 @@ abstract class Models
 
     public function isDirty($field)
     {
-        if (!$this->isNew()) {
-            if (array_key_exists($field, $this->_dirty)) {
-                return true;
-            }
-            if ($this->old_data && array_key_exists($field, $this->old_data)) {
-                if ($this->old_data[$field] == $this->data[$field]) {
-                    return false;
-                }
-            }
+        if (array_key_exists($field, $this->_dirty) || $this->isNew()) {
+            return true;
         }
-        return true;
+        return false;
     }
 
 
@@ -153,22 +168,15 @@ abstract class Models
      */
     public function setDirty($key = '')
     {
-        $this->_dirty[$key] = $key;
-    }
-
-
-    /**
-     * @return array
-     */
-    public function getDirtys()
-    {
-        return $this->_dirty;
-    }
-
-
-    public function toArrayOriginal()
-    {
-        return $this->original;
+        if (empty($key)) {
+            foreach (array_keys($this->fieldsMap) as $f => $fieldKey) {
+                $this->setDirty($f);
+            }
+        } else {
+            if (array_key_exists($key, $this->fieldsMap)) {
+                $this->_dirty[$key] = $key;
+            }
+        }
     }
 
     public function toArray()
@@ -291,6 +299,9 @@ abstract class Models
         $Fields = $this->fieldsMap;
         $array = null;
 
+        if ($this->isNew()) {
+            $this->setDirty();
+        }
 
         foreach ($data as $key => $val) {
             if ($type = $this->getType($key)) {

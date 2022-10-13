@@ -27,7 +27,7 @@ class GetObjectTest extends TestCase
         /* @var Get $Object */
         $Object = Model::get('Lead', $id);
 
-        $Object->set('VISITOR_NUMBER', 222222);
+        $Object->set('VISITOR_NUMBER', 2222221);
         $Object->save();
 
 

@@ -83,7 +83,7 @@ abstract class Method
     /**
      * @return \Bitrix24\Models\Crm\Lead\Get
      */
-    public function loadModel()
+    public function loadModel($result = [])
     {
         $value = str_ireplace('.', ' ', $this->_uri);
         $value = ucwords($value);
@@ -93,7 +93,9 @@ abstract class Method
         if (!class_exists($className)) {
             throw new ExceptionClient('Не удалось загрузить класс ' . $className);
         }
-        return (new $className());
+
+        $Model = new $className($result);
+        return $Model;
     }
 }
 

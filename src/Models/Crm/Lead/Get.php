@@ -67,7 +67,7 @@ use Bitrix24\Model;
  */
 class Get extends Models implements IModels
 {
-    public function __construct()
+    public function __construct($data = [])
     {
         $this->setAlias('CHAT_ID', 'UF_CRM_1665621150592');
         $this->setAlias('ROISTAT_ID', 'UF_CRM_1662118608905');
@@ -75,7 +75,7 @@ class Get extends Models implements IModels
         $this->setAlias('PAGE_URL', 'UF_CRM_1663927628378');
         $this->setAlias('PAGE_TITLE', 'UF_CRM_1663927675305');
         #$this->setAlias('SOURCE_ID', 'UF_CRM_1665568341670');
-        parent::__construct();
+        parent::__construct($data);
     }
 
     public function parserComments($visitor, array $messages)
