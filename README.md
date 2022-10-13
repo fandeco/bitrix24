@@ -32,11 +32,11 @@ tests = Tests\
   "repositories": [
     {
       "type": "vcs",
-      "url": "https://github.com/webnitros/bitrix24"
+      "url": "https://github.com/fandeco/bitrix24"
     }
   ],
   "require": {
-    "webnitros/bitrix24": "^1.0.0"
+    "fandeco/bitrix24": "^1.0.0"
   }
 }
 ```
