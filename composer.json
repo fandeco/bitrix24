@@ -1,5 +1,5 @@
 {
-  "name": "webnitros/bitrix24",
+  "name": "fandeco/bitrix24",
   "license": "MIT",
   "authors": [
     {
@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "tests": "phpunit --bootstrap bootstrap.php",
-    "up:release": "gh release create \"v1.0.0\" --generate-notes"
+    "up:release": "gh release create \"v1.0.1\" --generate-notes"
   },
   "keywords": [
     "client"
