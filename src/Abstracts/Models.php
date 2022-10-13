@@ -300,6 +300,19 @@ abstract class Models
         return null;
     }
 
+    protected $notice = false;
+
+    public function notice(bool $value)
+    {
+        $this->notice = $value;
+        return $this;
+    }
+
+    public function isNotice()
+    {
+        return $this->notice;
+    }
+
     private function rawData($action)
     {
         $action = ucfirst($action);
@@ -340,7 +353,7 @@ abstract class Models
         }
 
         $Method->addParam('fields', $array);
-        if ($this->isNew()) {
+        if ($this->isNew() || $this->isNotice()) {
             $Method->addParam('params', [
                 'REGISTER_SONET_EVENT' => 'Y' // уведомить о лиде
             ]);
