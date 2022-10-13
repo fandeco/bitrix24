@@ -4,3 +4,4 @@
 /vendor/
 /bootstrap.php
 /.phpunit.result.cache
+.env
