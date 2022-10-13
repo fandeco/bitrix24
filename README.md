@@ -57,6 +57,6 @@ BITRIX_BOTS = 'NAME BOT:API KEY'
 Модели работают аналогично объектам из базы данных с той разнице что выполнение запросов проиходит через REST
 
 ```php
-$Object = \Bitrix24\Model::get('Lead', 21225)
-$Object->get('NAME') // Имя пользователя
+$Object = \Bitrix24\Model::get('Lead', 21225);
+$Object->get('NAME'); // Имя пользователя
 ```
