@@ -69,6 +69,7 @@ abstract class Models
                 $this->fieldsMap[$field] = $type;
             }
         }
+
         foreach ($this->defaultFields as $field => $value) {
             if (!array_key_exists($field, $this->data)) {
                 $this->set($field, $value);
@@ -83,14 +84,16 @@ abstract class Models
      */
     protected $data;
 
+    public function fromArrayFirst(array $array)
+    {
+        $this->fromArray($array);
+        $this->old_data = $this->data;
+        return $this;
+    }
+
     public function fromArray(array $array, $saveOld = false)
     {
         $this->original = $array;
-        $saveOld = false;
-        if (is_null($this->old_data)) {
-            $this->old_data = [];
-            $saveOld = true;
-        }
         foreach ($array as $key => $item) {
             $this->set($key, $item, $saveOld);
         }
@@ -133,14 +136,6 @@ abstract class Models
             }
         }
         $this->data[$original_key] = $value;
-
-        // Записываем сиапые значения полей
-        if ($saveOld) {
-            if (!array_key_exists($original_key, $this->old_data)) {
-                $this->old_data[$original_key] = $value;
-            }
-        }
-
         return $this;
     }
 
@@ -148,7 +143,7 @@ abstract class Models
     {
         if (!$this->isNew()) {
             if (array_key_exists($field, $this->old_data)) {
-                if ($this->old_data[$field] === $this->data[$field]) {
+                if ($this->old_data[$field] == $this->data[$field]) {
                     return false;
                 }
             }
@@ -303,6 +298,7 @@ abstract class Models
                 }
             }
         }
+
 
         if (!$array) {
             return true;

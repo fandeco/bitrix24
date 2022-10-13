@@ -104,7 +104,7 @@ class Client
         if (!empty($data['result'][0])) {
             $result = $data['result'][0];
         }
-        return $this->getMethod()->loadModel()->fromArray($result);
+        return $this->getMethod()->loadModel()->fromArrayFirst($result);
     }
 
     public function send()
