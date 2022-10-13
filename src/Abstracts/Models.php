@@ -335,9 +335,6 @@ abstract class Models
             }
         }
 
-echo '<pre>'; 
-print_r($array); die;
-
         if (!$array) {
             return true;
         }
