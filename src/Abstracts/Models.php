@@ -157,6 +157,7 @@ abstract class Models
         }
         return false;
     }
+
     public function getDirty()
     {
         return $this->_dirty;
@@ -181,6 +182,11 @@ abstract class Models
                 $this->_dirty[$key] = $key;
             }
         }
+    }
+
+    public function resetDirty()
+    {
+        $this->_dirty = [];
     }
 
     public function toArray()
