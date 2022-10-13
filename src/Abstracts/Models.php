@@ -146,9 +146,11 @@ abstract class Models
 
     public function isDirty($field)
     {
-        if (array_key_exists($field, $this->old_data)) {
-            if ($this->old_data[$field] === $this->data[$field]) {
-                return false;
+        if (!$this->isNew()) {
+            if (array_key_exists($field, $this->old_data)) {
+                if ($this->old_data[$field] === $this->data[$field]) {
+                    return false;
+                }
             }
         }
         return true;
