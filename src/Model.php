@@ -125,13 +125,13 @@ class Model
      * @param string $className
      * @return Models|null
      */
-    public static function create(string $className)
+    public static function create(string $className, $data = [])
     {
         if (!$class = (new Model)->getClass($className)) {
             return null;
         }
         $class = str_ireplace('Method', 'Models', $class);
-        return (new $class());
+        return (new $class($data));
     }
 
 }
