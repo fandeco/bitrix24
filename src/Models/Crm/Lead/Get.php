@@ -74,7 +74,7 @@ class Get extends Models implements IModels
         $this->setAlias('VISITOR_NUMBER', 'UF_CRM_1665550327787');
         $this->setAlias('PAGE_URL', 'UF_CRM_1663927628378');
         $this->setAlias('PAGE_TITLE', 'UF_CRM_1663927675305');
-        $this->setAlias('SOURCE_1C', 'UF_CRM_1665568341670');
+        $this->setAlias('SOURCE_1C', 'UF_CRM_1666082879102');
         parent::__construct($data);
     }
 
@@ -130,6 +130,19 @@ class Get extends Models implements IModels
         $id = $this->get('COMPANY_ID');
         if (!empty($id)) {
             return Model::get('Company', $id);
+        }
+        return null;
+    }
+
+    public function products()
+    {
+        $id = $this->get('ID');
+        if (!empty($id)) {
+            $products = Model::request(new \Bitrix24\Method\Crm\Lead\Products\Get(), ['lead_id' => $id]);
+            echo '<pre>';
+            print_r($products);
+            die;
+            return Model::get('Products', $id);
         }
         return null;
     }
