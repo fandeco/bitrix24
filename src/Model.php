@@ -53,7 +53,18 @@ class Model
 
         /* @var IMethod $Method */
         $Method = new $class();
+        return self::request($Method, $criteria);
+    }
 
+
+    /**
+     * @param $className
+     * @param $criteria
+     * @return Models|null
+     * @throws \Exception
+     */
+    public static function request($Method, $criteria)
+    {
         if (is_int($criteria)) {
             $Method->addParam('id', $criteria);
         } else {
@@ -61,10 +72,8 @@ class Model
         }
 
         $Method->addParam('select', ['*', 'UF_*']);
-
         $Bot = new Bot('API');
         $Client = $Bot->method($Method);
-
         try {
             if ($Object = $Client->request()) {
                 $Object->_new = false;

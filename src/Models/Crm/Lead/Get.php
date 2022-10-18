@@ -74,8 +74,30 @@ class Get extends Models implements IModels
         $this->setAlias('VISITOR_NUMBER', 'UF_CRM_1665550327787');
         $this->setAlias('PAGE_URL', 'UF_CRM_1663927628378');
         $this->setAlias('PAGE_TITLE', 'UF_CRM_1663927675305');
-        $this->setAlias('SOURCE_1C', 'UF_CRM_1666082879102');
+        $this->setAlias('SOURCE_1C', 'UF_CRM_1665568341670');
+        $this->setAlias('SOURCE_MANUAL', 'UF_CRM_1666082879102');
+#UF_CRM_1666082879102
+        #UF_CRM_1666082879102
         parent::__construct($data);
+    }
+
+    public function getSoruce()
+    {
+        $source = null;
+        $SOURCE_1C = (string)$this->get('SOURCE_1C');
+        if (!empty($SOURCE_1C)) {
+            return $SOURCE_1C;
+        }
+        $SOURCE_MANUAL = (int)$this->get('SOURCE_MANUAL');
+        $aliases = [
+            44 => 'artelamp.ru',
+            45 => 'divinare.ru',
+            46 => 'fandeco.ru',
+        ];
+        if (array_key_exists($SOURCE_MANUAL, $aliases)) {
+            $source = $aliases[$SOURCE_MANUAL];
+        }
+        return $source;
     }
 
     public function parserComments($visitor, array $messages)
