@@ -81,7 +81,7 @@ class Get extends Models implements IModels
         parent::__construct($data);
     }
 
-    public function getSoruce()
+    public function getSource()
     {
         $source = null;
         $SOURCE_1C = (string)$this->get('SOURCE_1C');
