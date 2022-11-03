@@ -120,9 +120,9 @@ class Get extends Models implements IModels
                         $type = 'Менеджер';
 
                         $agent_id = $this->get('ASSIGNED_BY_ID');
-                        if (!empty($message['agent_id'])) {
-                            $agent_id = $message['agent_id'];
-                        }
+                        #if (!empty($message['agent_id'])) {
+                        #    $agent_id = $message['agent_id'];
+                        #}
                         #$agent_id = $message['agent_id'];
                         $agentName = 'Не определен';
                         if ($User = Model::get('User', $agent_id)) {
